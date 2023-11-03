@@ -5,10 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="03442af4-540a-435b-b927-52dd9147c965" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainserver/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainserver/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainserver/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainserver/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainserver/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainserver/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainserver/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainserver/src/main/java/com/main/mainserver/MainserverApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainserver/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainserver/src/test/java/com/main/mainserver/MainserverApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,9 +28,18 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+    <projectState path="$PROJECT_DIR$/mainserver">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/statserver">
+      <ProjectState />
+    </projectState>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/statserver" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2XgHOWW8xYkCjR61z88IGZvPG3v" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -31,9 +49,27 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "WebServerToolWindowFactoryState": "false"
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "corretto-17",
+    "nodejs_package_manager_path": "npm"
   }
 }]]></component>
+  <component name="RunManager" selected="Spring Boot.MainserverApplication">
+    <configuration name="MainserverApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="mainserver.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.main.mainserver.MainserverApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StatserverApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="statserver.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.stat.statserver.StatserverApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -42,7 +78,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1699043770392</updated>
-      <workItem from="1699043771604" duration="6000" />
+      <workItem from="1699043771604" duration="279000" />
     </task>
     <servers />
   </component>

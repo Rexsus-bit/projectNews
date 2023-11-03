@@ -11,6 +11,24 @@
           </set>
         </option>
       </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/mainserver" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/mainserver" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/statserver" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/statserver" />
+          </set>
+        </option>
+      </GradleProjectSettings>
     </option>
   </component>
 </project>
