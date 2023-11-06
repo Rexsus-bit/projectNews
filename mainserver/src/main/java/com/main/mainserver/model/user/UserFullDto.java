@@ -1,11 +1,11 @@
 package com.main.mainserver.model.user;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -13,9 +13,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class UserFullDto {
 
-    private String name;
+    private Long id;
     private String email;
+    private String password;
+    private String username;
     private Role role;
-    private LocalDateTime creationDateTime;
+    private UserStatus userStatus;
 
 }

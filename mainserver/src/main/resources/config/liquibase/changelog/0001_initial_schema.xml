@@ -46,10 +46,21 @@
             <column name="user_id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="username" type="VARCHAR(100)"/>
-            <column name="email" type="VARCHAR(255)"/>
-            <column name="role" type="VARCHAR(50)"/>
-            <column name="created_at" type="TIMESTAMP"/>
+            <column name="email" type="VARCHAR(255)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(255)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="user_role" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_status" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
         <addForeignKeyConstraint baseTableName="news" baseColumnNames="author_id"
@@ -67,40 +78,6 @@
         <addForeignKeyConstraint baseTableName="likes" baseColumnNames="user_id"
                                  constraintName="FK_likes_user" referencedTableName="users"
                                  referencedColumnNames="user_id"/>
-
-<!--        <createTable tableName="users">-->
-<!--            <column name="username" type="varchar(50)">-->
-<!--                <constraints primaryKey="true" nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="password" type="varchar">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="enabled" type="boolean" defaultValueBoolean="true">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--        </createTable>-->
-
-<!--        <createTable tableName="authorities">-->
-<!--            <column name="username" type="varchar(50)">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--            <column name="authority" type="varchar(50)">-->
-<!--                <constraints nullable="false"/>-->
-<!--            </column>-->
-<!--        </createTable>-->
-
-<!--        <addForeignKeyConstraint baseTableName="authorities"-->
-<!--                                 baseColumnNames="username"-->
-<!--                                 constraintName="fk_authorities_users"-->
-<!--                                 referencedTableName="users"-->
-<!--                                 referencedColumnNames="username"/>-->
-
-<!--        <createIndex tableName="authorities"-->
-<!--                     indexName="ix_auth_username"-->
-<!--                     unique="true">-->
-<!--            <column name="username"/>-->
-<!--            <column name="authority"/>-->
-<!--        </createIndex>-->
 
     </changeSet>
 </databaseChangeLog>

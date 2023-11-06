@@ -13,7 +13,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UserShortDto {
 
-    private Long id;
-    private String name;
+    private String username;
+    private Role role;
+    private UserStatus userStatus;
 
 }

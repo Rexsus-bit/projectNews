@@ -72,7 +72,7 @@ public class UserController {
 //        System.out.println(newsList);
 //        List<NewsDto> li = NewsDtoMapper.INSTANCE.toNewsDtoList(newsList);
 //        System.out.println(NewsDtoMapper.INSTANCE.toNewsDtoList(newsList));
-
+//        System.out.println("win"); TODO
         return NewsShortDtoMapper.INSTANCE.toNewsShortDtoList(userService.findNews(rangeStart, rangeEnd , from, size));
     }
 
