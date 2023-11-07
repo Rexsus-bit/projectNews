@@ -3,19 +3,21 @@ package com.main.mainserver.model.user;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.Value;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Value
+@Builder
 public class NewUserRequest {
 
     @Email
-    private String email;
+    String email;
     @NotBlank
-    private String name;
+    String password;
+    @NotBlank
+    String username;
 
 }

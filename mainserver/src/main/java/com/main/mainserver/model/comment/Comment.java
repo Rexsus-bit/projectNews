@@ -24,13 +24,13 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comment_id")
     private Long id;
-    private String message;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "owner_id")
-    private User owner;
-    @ManyToOne(cascade = CascadeType.ALL)
+    private String text;
+    @ManyToOne
     @JoinColumn(name = "news_id")
     private News news;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User owner;
     @Column(name = "comment_date")
     private LocalDateTime creationTime;
 }

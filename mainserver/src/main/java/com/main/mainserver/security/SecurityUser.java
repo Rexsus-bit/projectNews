@@ -17,12 +17,18 @@ public class SecurityUser implements UserDetails {
     private final String password;
     private final List<SimpleGrantedAuthority> authorities;
     private final Boolean isActive;
+    private final Long id;
 
-    public SecurityUser(String username, String password, List<SimpleGrantedAuthority> authorities, Boolean isActive) {
+    public SecurityUser(String username, String password, List<SimpleGrantedAuthority> authorities, Boolean isActive, Long id) {
         this.username = username;
         this.password = password;
         this.authorities = authorities;
         this.isActive = isActive;
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     @Override
@@ -61,13 +67,16 @@ public class SecurityUser implements UserDetails {
     }
 
     public static UserDetails fromUser (User user){
-        return new org.springframework.security.core.userdetails.User(
-                user.getEmail(), user.getPassword(),
-                user.getUserStatus().equals(UserStatus.ACTIVE),
-                user.getUserStatus().equals(UserStatus.ACTIVE),
-                user.getUserStatus().equals(UserStatus.ACTIVE),
-                user.getUserStatus().equals(UserStatus.ACTIVE),
-                user.getRole().getAuthorities()
-        );
+//        return new org.springframework.security.core.userdetails.User(
+//                user.getEmail(), user.getPassword(),
+//                user.getUserStatus().equals(UserStatus.ACTIVE),
+//                user.getUserStatus().equals(UserStatus.ACTIVE),
+//                user.getUserStatus().equals(UserStatus.ACTIVE),
+//                user.getUserStatus().equals(UserStatus.ACTIVE),
+//                user.getRole().getAuthorities()
+//        );
+
+    return new SecurityUser(user.getEmail(), user.getPassword(), user.getRole().getAuthorities().stream().toList(),
+            user.getUserStatus().equals(UserStatus.ACTIVE), user.getId());
     }
 }

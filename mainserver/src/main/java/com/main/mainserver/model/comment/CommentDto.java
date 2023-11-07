@@ -1,17 +1,17 @@
 package com.main.mainserver.model.comment;
 
-import com.main.mainserver.model.user.UserFullDto;
+import com.main.mainserver.model.user.UserShortDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.Value;
 
 import java.time.LocalDateTime;
 
+@Value
 @Builder
-@Getter
-@Setter
 public class CommentDto {
-    private String message;
-    private UserFullDto owner;
-    private LocalDateTime creationTime;
+    String text;
+    UserShortDto owner;
+    LocalDateTime creationTime;
 }

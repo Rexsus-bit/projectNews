@@ -1,6 +1,6 @@
 package com.main.mainserver.security;
 
-import com.main.mainserver.exception.UserIsNotFoundException;
+import com.main.mainserver.exception.controllersExceptions.exceptions.UserIsNotFoundException;
 import com.main.mainserver.model.user.User;
 import com.main.mainserver.repository.UserJPARepository;
 import org.springframework.security.core.userdetails.UserDetails;

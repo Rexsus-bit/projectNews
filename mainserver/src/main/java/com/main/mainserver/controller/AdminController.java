@@ -1,10 +1,14 @@
 package com.main.mainserver.controller;
 
-import com.main.mainserver.mapper.NewsFullDtoMapper;
-import com.main.mainserver.mapper.UserFullDtoMapper;
+
+import com.main.mainserver.mapper.NewsMapper;
+import com.main.mainserver.mapper.UserMapper;
 import com.main.mainserver.model.news.NewsFullDto;
 import com.main.mainserver.model.user.NewUserRequest;
+import com.main.mainserver.model.user.Role;
 import com.main.mainserver.model.user.UserFullDto;
+
+import com.main.mainserver.model.user.UserStatus;
 import com.main.mainserver.service.AdminService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -24,35 +29,30 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/admin")
 public class AdminController {
 
-
     private final AdminService adminService;
+    private final UserMapper userMapper;
+    private final NewsMapper newsMapper;
 
-// TODO    rejectTheNewsById — администратор отклоняет новость, ее требуется скорректировать для повторного согласования
-//         approveTheNewsById — администратор одобряет новость, после чего она становится доступна любому пользователю
-//         deleteTheNewsById — администратор удаляет новость любого автора
-//         createTheUser — создание пользователя
-//         deleteTheUser — удаление пользователя
-//         createTheAuthor — создание автора
-//         deleteTheAuthor — удаление автора
 
     @PatchMapping("/news/{newsId}/reject")
-    public NewsFullDto rejectNews (@PathVariable Long newsId) {
-        return NewsFullDtoMapper.INSTANCE.toNewsFullDto(adminService.rejectNews(newsId));
+    public void rejectNews(@PathVariable Long newsId) {
+        adminService.rejectNews(newsId);
     }
 
     @PatchMapping("/news/{newsId}/publish")
-    public NewsFullDto approveNews(@PathVariable Long newsId) {
-        return NewsFullDtoMapper.INSTANCE.toNewsFullDto(adminService.approveNews(newsId));
+    public void approveNews(@PathVariable Long newsId) {
+        adminService.approveNews(newsId);
     }
 
-    @DeleteMapping("/news/{newsId}/user/delete")
+    @DeleteMapping("/news/{newsId}/delete")
     public void deleteNews(@PathVariable Long newsId) {
         adminService.deleteNews(newsId);
     }
 
     @PostMapping("/users")
-    public UserFullDto addUser(@Valid @RequestBody NewUserRequest newUserRequest) {
-        return UserFullDtoMapper.INSTANCE.toUserFullDto(adminService.addUser(newUserRequest));
+    public UserFullDto addUser(@RequestParam Role role,
+                               @Valid @RequestBody NewUserRequest newUserRequest) {
+        return userMapper.toUserFullDto(adminService.addUser(newUserRequest, role));
     }
 
     @DeleteMapping("/users/{userId}")
@@ -60,18 +60,11 @@ public class AdminController {
         adminService.deleteUsers(userId);
     }
 
-    // TODO Publisher по сути пользователь.
-
-    @PostMapping("/publishers")
-    public UserFullDto addPublisher(@Valid @RequestBody NewUserRequest newUserRequest) {
-        return UserFullDtoMapper.INSTANCE.toUserFullDto(adminService.addPublisher(newUserRequest));
+    @PatchMapping("/user/{userId}/ban")
+    public void banUser(@PathVariable Long userId,
+                        @RequestParam UserStatus userStatus) {
+        adminService.banUser(userId, userStatus);
     }
-
-    @DeleteMapping("/publishers/{userId}")
-    public void deletePublisher(@PathVariable Long userId) {
-        adminService.deletePublisher(userId);
-    }
-
 
 
 }

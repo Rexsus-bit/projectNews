@@ -2,19 +2,17 @@ package com.main.mainserver.model.news;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Value;
 
-@Getter
-@Setter
+@Value
 @Builder
 public class NewsRequestDto {
 
     @NotBlank
-    private String title;
+    String title;
     @NotBlank
-    private String description;
+    String description;
     @NotBlank
-    private String text;
+    String text;
 
 }

@@ -11,6 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -38,9 +40,12 @@ import java.util.Set;
 @Table(name = "news")
 @ToString
 public class News {
+
 // TODO оставить потом валидацию только в DTO
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "news_id")
     private Long id;
     @NotBlank
     private String title;
@@ -56,15 +61,15 @@ public class News {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column(name = "datetime")
     private LocalDateTime dateTime;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "author_id")
+    @ManyToOne
+    @JoinColumn(name = "publisher_id")
     private User publisher;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true) // TODO OrphanRemoval уместно?
-    @JoinColumn(name = "like_id")
-    private Set<User> likesList;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true) // TODO OrphanRemoval уместно?
-    @JoinColumn(name = "comment_id")
-    private List<Comment> comments;
-
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "likes",
+            joinColumns = {@JoinColumn(name = "news_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")})
+    private Set<User> likesSet;
+    @OneToMany(mappedBy = "news")
+    private List<Comment> commentsList;
 
 }

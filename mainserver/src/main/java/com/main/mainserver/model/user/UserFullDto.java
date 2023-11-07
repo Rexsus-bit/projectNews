@@ -2,22 +2,22 @@ package com.main.mainserver.model.user;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.Value;
 
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Value
+@Builder
 public class UserFullDto {
 
-    private Long id;
-    private String email;
-    private String password;
-    private String username;
-    private Role role;
-    private UserStatus userStatus;
+    Long id;
+    String email;
+    String password;
+    String username;
+    Role role;
+    UserStatus userStatus;
 
 }

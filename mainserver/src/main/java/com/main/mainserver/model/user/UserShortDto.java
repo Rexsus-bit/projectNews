@@ -5,16 +5,14 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.Value;
 
+@Value
 @Builder
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class UserShortDto {
 
-    private String username;
-    private Role role;
-    private UserStatus userStatus;
+    String username;
+    Role role;
+    UserStatus userStatus;
 
 }
