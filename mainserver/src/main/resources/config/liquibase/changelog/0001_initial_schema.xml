@@ -63,6 +63,21 @@
             </column>
         </createTable>
 
+        <createTable tableName="stats_records">
+            <column name="stats_id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uri" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="datetime" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
         <createIndex tableName="likes"
                      indexName="ix_unique_likes"
                      unique="true">

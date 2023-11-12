@@ -32,15 +32,12 @@ sourceCompatibility = JavaVersion.VERSION_17
 
 dependencies {
 
+    implementation project(':statserver')
 
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
-
-    // If you are using mapstruct in test code
     testAnnotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
-//    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
-//    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
     implementation 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 
     implementation 'org.springframework.boot:spring-boot-starter'

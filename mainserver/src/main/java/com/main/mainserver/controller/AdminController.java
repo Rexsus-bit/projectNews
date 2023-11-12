@@ -31,8 +31,6 @@ public class AdminController {
 
     private final AdminService adminService;
     private final UserMapper userMapper;
-    private final NewsMapper newsMapper;
-
 
     @PatchMapping("/news/{newsId}/reject")
     public void rejectNews(@PathVariable Long newsId) {

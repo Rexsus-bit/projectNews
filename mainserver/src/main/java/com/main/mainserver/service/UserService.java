@@ -1,6 +1,7 @@
 package com.main.mainserver.service;
 
-import com.main.mainserver.client.NewsApiRestClient;
+import com.main.mainserver.clientNewsApi.NewsApiRestClient;
+import com.main.mainserver.clientStats.StatisticClient;
 import com.main.mainserver.exception.controllersExceptions.exceptions.CommentIsNotExistedException;
 import com.main.mainserver.exception.controllersExceptions.exceptions.LikeIsExistedException;
 import com.main.mainserver.exception.controllersExceptions.exceptions.LikeIsNotExistedException;
@@ -19,6 +20,8 @@ import com.main.mainserver.repository.NewsCriteriaRepository;
 import com.main.mainserver.repository.NewsJpaRepository;
 import com.main.mainserver.repository.UserJPARepository;
 import com.main.mainserver.security.SecurityUser;
+import com.stat.statserver.model.StatsRecordDto;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -38,17 +41,23 @@ public class UserService {
     private final LikeJpaRepository likeJpaRepository;
     private final NewsApiRestClient newsApiRestClient;
     private final NewsCriteriaRepository newsCriteriaRepository;
+    private final StatisticClient statisticClient;
 
     // TODO взаимодействие только с PUBLISHED
     // TODO подумать где нужно @Transactional
 
     @Transactional
     public List<News> findNews(String text, List<Long> usersIdList, LocalDateTime rangeStart, LocalDateTime rangeEnd,
-                               Integer from, Integer size) {
+                               Integer from, Integer size, SecurityUser securityUser, HttpServletRequest request) {
+        statisticClient.sendStatisticsInfo(new StatsRecordDto(securityUser.getId(), request.getRequestURI(),
+                LocalDateTime.now()));
         return newsCriteriaRepository.findNewsByCustomCriteria(text, usersIdList, rangeStart, rangeEnd, from, size);
     } // checked
 
-    public NewsReportDto getNewsFromWeatherApiService(String query, LocalDate from, LocalDate to) {
+    public NewsReportDto getNewsFromWeatherApiService(String query, LocalDate from, LocalDate to,
+                                                      SecurityUser securityUser, HttpServletRequest request) {
+        statisticClient.sendStatisticsInfo(new StatsRecordDto(securityUser.getId(), request.getRequestURI(),
+                LocalDateTime.now()));
         return newsApiRestClient.requestNews(query, from, to);
     } // checked
 
@@ -92,7 +101,9 @@ public class UserService {
     }
 
     @Transactional // сначала по лайкам потом по комментам
-    public List<News> getTopNews(Integer limit) {
+    public List<News> getTopNews(Integer limit, SecurityUser securityUser, HttpServletRequest request) {
+        statisticClient.sendStatisticsInfo(new StatsRecordDto(securityUser.getId(), request.getRequestURI(),
+                LocalDateTime.now()));
         return newsJpaRepository.findAllAndSortByLikesAndComments(limit);
     } // checked
 

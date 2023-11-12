@@ -6,6 +6,7 @@ import com.main.mainserver.model.news.NewsShortDto;
 import com.main.mainserver.model.news.NewsRequestDto;
 import com.main.mainserver.security.SecurityUser;
 import com.main.mainserver.service.PublisherService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,9 +32,10 @@ public class PublisherController {
 
     @PostMapping("/news")
     public NewsShortDto createNews(@Valid @RequestBody NewsRequestDto newsRequestDto,
-                                   @AuthenticationPrincipal SecurityUser securityUser) {
+                                   @AuthenticationPrincipal SecurityUser securityUser,
+                                   HttpServletRequest request) {
         return newsMapper.toNewsShortDto(publisherService
-                .createNews(newsMapper.toNews(newsRequestDto), securityUser));
+                .createNews(newsMapper.toNews(newsRequestDto), securityUser, request));
     }
 
     // TODO подумать над переопределением имени path variable

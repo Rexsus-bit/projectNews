@@ -8,6 +8,7 @@ import com.main.mainserver.model.news.NewsShortDto;
 import com.main.mainserver.model.newsApiDto.NewsReportDto;
 import com.main.mainserver.security.SecurityUser;
 import com.main.mainserver.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -44,8 +45,11 @@ public class UserController {
                                        @RequestParam(required = false)
                                        @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeEnd,
                                        @RequestParam(defaultValue = "0") Integer from,
-                                       @RequestParam(defaultValue = "10") Integer size) {
-        return newsMapper.toNewsShortDtoList(userService.findNews(text, usersIdList, rangeStart, rangeEnd, from, size));
+                                       @RequestParam(defaultValue = "10") Integer size,
+                                       @AuthenticationPrincipal SecurityUser securityUser,
+                                       HttpServletRequest request) {
+        return newsMapper.toNewsShortDtoList(userService.findNews(text, usersIdList, rangeStart, rangeEnd, from, size,
+                securityUser, request));
     }
 
     @GetMapping("/news/external")
@@ -53,8 +57,10 @@ public class UserController {
                                                       @RequestParam(required = false)
                                                       @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate from,
                                                       @RequestParam(required = false)
-                                                      @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate to) {
-        return userService.getNewsFromWeatherApiService(query, from, to);
+                                                      @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate to,
+                                                      @AuthenticationPrincipal SecurityUser securityUser,
+                                                      HttpServletRequest request) {
+        return userService.getNewsFromWeatherApiService(query, from, to, securityUser, request);
 
     }
 
@@ -84,8 +90,9 @@ public class UserController {
     }
 
     @GetMapping("/popular")
-    public List<NewsShortDto> getTopNews(@RequestParam(defaultValue = "10") Integer limit) {
-        return newsMapper.toNewsShortDtoList(userService.getTopNews(limit));
+    public List<NewsShortDto> getTopNews(@RequestParam(defaultValue = "10") Integer limit, @AuthenticationPrincipal SecurityUser securityUser,
+                                         HttpServletRequest request) {
+        return newsMapper.toNewsShortDtoList(userService.getTopNews(limit, securityUser, request));
     }
 
 }

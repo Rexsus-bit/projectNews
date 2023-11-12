@@ -1,5 +1,6 @@
 package com.main.mainserver.service;
 
+import com.main.mainserver.clientStats.StatisticClient;
 import com.main.mainserver.exception.controllersExceptions.exceptions.NewsIsNotExistedException;
 import com.main.mainserver.exception.controllersExceptions.exceptions.UserIsNotFoundException;
 import com.main.mainserver.exception.controllersExceptions.exceptions.ValidationException;
@@ -10,10 +11,14 @@ import com.main.mainserver.model.user.User;
 import com.main.mainserver.repository.NewsJpaRepository;
 import com.main.mainserver.repository.UserJPARepository;
 import com.main.mainserver.security.SecurityUser;
+import com.stat.statserver.model.StatsRecordDto;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -22,9 +27,11 @@ public class PublisherService {
     private final NewsJpaRepository newsJpaRepository;
     private final UserJPARepository userJPARepository;
     private final NewsMapper newsMapper;
+    private final StatisticClient statisticClient;
 
     @Transactional
-    public News createNews(News news, @AuthenticationPrincipal  SecurityUser securityUser) {
+    public News createNews(News news, @AuthenticationPrincipal  SecurityUser securityUser, HttpServletRequest request) {
+        statisticClient.sendStatisticsInfo(new StatsRecordDto(securityUser.getId(), request.getRequestURI(), LocalDateTime.now()));
         User publisher = userJPARepository.findById(securityUser.getId())
                 .orElseThrow(() -> new UserIsNotFoundException(securityUser.getId()));
         news.setPublisher(publisher);
