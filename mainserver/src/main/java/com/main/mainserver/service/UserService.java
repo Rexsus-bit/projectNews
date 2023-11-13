@@ -33,7 +33,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserService implements UserServiceImpl {
 
     private final UserJPARepository userJPARepository;
     private final NewsJpaRepository newsJpaRepository;
@@ -43,24 +43,24 @@ public class UserService {
     private final NewsCriteriaRepository newsCriteriaRepository;
     private final StatisticClient statisticClient;
 
-    // TODO взаимодействие только с PUBLISHED
-    // TODO подумать где нужно @Transactional
-
+    @Override
     @Transactional
     public List<News> findNews(String text, List<Long> usersIdList, LocalDateTime rangeStart, LocalDateTime rangeEnd,
                                Integer from, Integer size, SecurityUser securityUser, HttpServletRequest request) {
         statisticClient.sendStatisticsInfo(new StatsRecordDto(securityUser.getId(), request.getRequestURI(),
                 LocalDateTime.now()));
         return newsCriteriaRepository.findNewsByCustomCriteria(text, usersIdList, rangeStart, rangeEnd, from, size);
-    } // checked
+    }
 
+    @Override
     public NewsReportDto getNewsFromWeatherApiService(String query, LocalDate from, LocalDate to,
                                                       SecurityUser securityUser, HttpServletRequest request) {
         statisticClient.sendStatisticsInfo(new StatsRecordDto(securityUser.getId(), request.getRequestURI(),
                 LocalDateTime.now()));
         return newsApiRestClient.requestNews(query, from, to);
-    } // checked
+    }
 
+    @Override
     @Transactional
     public Comment addCommentToNews(Long newsId, String commentText, SecurityUser securityUser) {
         News news = newsJpaRepository.findById(newsId)
@@ -72,16 +72,18 @@ public class UserService {
                 -> new UserIsNotFoundException(securityUser.getId()));
         Comment comment = new Comment(null, commentText, news, user, LocalDateTime.now());
         return commentJPARepository.save(comment);
-    } // checked
+    }
 
+    @Override
     @Transactional
     public void deleteCommentToNews(Long commentId, SecurityUser securityUser) {
         int cnt = commentJPARepository.deleteCommentByIdAndOwnerId(commentId, securityUser.getId());
         if (cnt == 0) {
             throw new CommentIsNotExistedException(commentId, securityUser.getId());
         }
-    } // checked
+    }
 
+    @Override
     @Transactional
     public void addLikeFromUser(Long newsId, SecurityUser securityUser) {
         if (!newsJpaRepository.existsById(newsId)) throw new NewsIsNotExistedException(newsId);
@@ -90,21 +92,23 @@ public class UserService {
         } catch (DataIntegrityViolationException e) {
             throw new LikeIsExistedException(securityUser.getId(), newsId);
         }
-    } // checked
+    }
 
+    @Override
     @Transactional
     public void deleteLikeFromUser(Long newsId, SecurityUser securityUser) {
         int count = likeJpaRepository.deleteLikeByUserIdAndNewsId(securityUser.getId(), newsId);
         if (count == 0) {
             throw new LikeIsNotExistedException(newsId, securityUser.getId());
-        } // checked
+        }
     }
 
+    @Override
     @Transactional // сначала по лайкам потом по комментам
     public List<News> getTopNews(Integer limit, SecurityUser securityUser, HttpServletRequest request) {
         statisticClient.sendStatisticsInfo(new StatsRecordDto(securityUser.getId(), request.getRequestURI(),
                 LocalDateTime.now()));
         return newsJpaRepository.findAllAndSortByLikesAndComments(limit);
-    } // checked
+    }
 
 }

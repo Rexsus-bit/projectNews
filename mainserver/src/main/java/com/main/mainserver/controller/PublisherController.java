@@ -6,6 +6,9 @@ import com.main.mainserver.model.news.NewsShortDto;
 import com.main.mainserver.model.news.NewsRequestDto;
 import com.main.mainserver.security.SecurityUser;
 import com.main.mainserver.service.PublisherService;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/publish")
+@Api("Контроллер для объектов Weather")
 public class PublisherController {
 
     private final PublisherService publisherService;
@@ -31,6 +35,7 @@ public class PublisherController {
     private final NewsMapper newsMapper;
 
     @PostMapping("/news")
+    @ApiOperation("Метод создает новый объект Weather")
     public NewsShortDto createNews(@Valid @RequestBody NewsRequestDto newsRequestDto,
                                    @AuthenticationPrincipal SecurityUser securityUser,
                                    HttpServletRequest request) {
