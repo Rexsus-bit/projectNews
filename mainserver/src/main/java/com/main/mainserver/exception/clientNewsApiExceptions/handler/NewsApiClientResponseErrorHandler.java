@@ -19,7 +19,7 @@ import java.io.IOException;
 
 
 @Component
-public class RestTemplateResponseErrorHandler implements ResponseErrorHandler {
+public class NewsApiClientResponseErrorHandler implements ResponseErrorHandler {
 
     @Override
     public boolean hasError(ClientHttpResponse httpResponse)

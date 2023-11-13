@@ -7,7 +7,7 @@ public class CommentIsNotExistedException extends NewsAppException {
 
     public CommentIsNotExistedException(Long commentId, Long userId) {
         super(String.format("Комментарий с id=%d у пользователя с id=%d не найден.", commentId, userId), 116,
-                HttpStatus.BAD_REQUEST);
+                HttpStatus.NOT_FOUND);
     }
 
 }

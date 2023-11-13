@@ -1,6 +1,6 @@
 package com.main.mainserver.clientNewsApi;
 
-import com.main.mainserver.exception.clientNewsApiExceptions.handler.RestTemplateResponseErrorHandler;
+import com.main.mainserver.exception.clientNewsApiExceptions.handler.NewsApiClientResponseErrorHandler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +21,7 @@ public class NewsRestTemplateConfig {
         return restTemplateBuilder
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
                 .defaultHeader("X-Api-Key", API_KEY)
-                .errorHandler(new RestTemplateResponseErrorHandler())
+                .errorHandler(new NewsApiClientResponseErrorHandler())
                 .build();
     }
 

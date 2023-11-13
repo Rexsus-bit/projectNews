@@ -1,9 +1,10 @@
 package com.main.mainserver.service;
 
 import com.main.mainserver.exception.controllersExceptions.exceptions.NewsForApprovalException;
-import com.main.mainserver.exception.controllersExceptions.exceptions.NewsIsNotExistedException;
+import com.main.mainserver.exception.controllersExceptions.exceptions.NewsIsNotAvaliableException;
+import com.main.mainserver.exception.controllersExceptions.exceptions.UniqueDataException;
 import com.main.mainserver.exception.controllersExceptions.exceptions.UserIsNotFoundException;
-import com.main.mainserver.exception.controllersExceptions.exceptions.ValidationException;
+import com.main.mainserver.exception.controllersExceptions.exceptions.RightsValidationException;
 import com.main.mainserver.mapper.UserMapper;
 import com.main.mainserver.model.news.NewsStatus;
 import com.main.mainserver.model.user.NewUserRequest;
@@ -52,19 +53,19 @@ public class AdminServiceImpl implements AdminService {
     @Transactional
     public void deleteNews(Long newsId) {
         int cnt = newsJpaRepository.deleteNewsById(newsId);
-        if (cnt == 0) throw new NewsIsNotExistedException(newsId);
+        if (cnt == 0) throw new NewsIsNotAvaliableException(newsId);
     }
 
     @Override
     @Transactional
     public User addUser(NewUserRequest newUserRequest, Role role) {
         User user = userMapper.toUser(newUserRequest);
-        if (role.equals(Role.ADMIN)) throw new ValidationException("Недостаточно прав для создания администратора.");
+        if (role.equals(Role.ADMIN)) throw new RightsValidationException("Недостаточно прав для создания администратора.");
         user.setRole(role);
         user.setUserStatus(UserStatus.ACTIVE);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         if (userJPARepository.existsByEmailOrUsername(user.getEmail(), user.getUsername()))
-            throw new ValidationException("Необходимо использовать другой username или e-mail.");
+            throw new UniqueDataException("Необходимо использовать другой username и/или e-mail");
         return userJPARepository.save(user);
     }
 
@@ -73,7 +74,7 @@ public class AdminServiceImpl implements AdminService {
     public void deleteUsers(Long userId) {
         User user = userJPARepository.findById(userId).orElseThrow(() -> new UserIsNotFoundException(userId));
         if (user.getRole().equals(Role.ADMIN)) {
-            throw new ValidationException("Администратор не может быть удален.");
+            throw new RightsValidationException("Администратор не может быть удален.");
         }
         userJPARepository.deleteById(userId);
     }

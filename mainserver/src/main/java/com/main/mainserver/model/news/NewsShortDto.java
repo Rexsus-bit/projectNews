@@ -1,13 +1,13 @@
 package com.main.mainserver.model.news;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.main.mainserver.model.comment.CommentDto;
 import com.main.mainserver.model.user.UserShortDto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Value;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,7 +26,7 @@ public class NewsShortDto {
     @NotBlank
     String text;
     @NotNull
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     LocalDateTime dateTime;
     UserShortDto publisher;
     Set<UserShortDto> likesSet;

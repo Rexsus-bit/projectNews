@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 
 @Value
 @Builder
-public class InvalidAuthError {
+public class ErrorDto {
     Integer errorCode;
     String message;
     HttpStatus status;

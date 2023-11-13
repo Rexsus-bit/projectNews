@@ -4,8 +4,6 @@ import com.main.mainserver.model.user.NewUserRequest;
 import com.main.mainserver.model.user.Role;
 import com.main.mainserver.model.user.User;
 import com.main.mainserver.model.user.UserStatus;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Transactional;
 
 public interface AdminService {
 

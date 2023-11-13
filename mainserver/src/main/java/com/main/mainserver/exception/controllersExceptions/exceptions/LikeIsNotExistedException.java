@@ -7,7 +7,7 @@ public class LikeIsNotExistedException extends NewsAppException {
 
     public LikeIsNotExistedException(Long newsId, Long userId) {
         super(String.format("У новости с id=%d отсутствует лайк пользователя с id=%d.", newsId, userId), 118,
-                HttpStatus.BAD_REQUEST);
+                HttpStatus.NOT_FOUND);
     }
 
 }

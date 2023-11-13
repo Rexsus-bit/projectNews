@@ -1,9 +1,9 @@
 package com.main.mainserver.service;
 
 import com.main.mainserver.clientStats.StatisticClient;
-import com.main.mainserver.exception.controllersExceptions.exceptions.NewsIsNotExistedException;
+import com.main.mainserver.exception.controllersExceptions.exceptions.NewsIsNotAvaliableException;
 import com.main.mainserver.exception.controllersExceptions.exceptions.UserIsNotFoundException;
-import com.main.mainserver.exception.controllersExceptions.exceptions.ValidationException;
+import com.main.mainserver.exception.controllersExceptions.exceptions.RightsValidationException;
 import com.main.mainserver.mapper.NewsMapper;
 import com.main.mainserver.model.news.News;
 import com.main.mainserver.model.news.NewsRequestDto;
@@ -43,9 +43,9 @@ public class PublisherServiceImpl implements PublisherService {
     @Transactional
     public News updateNews(Long newsId, NewsRequestDto newsRequestDto,
                            @AuthenticationPrincipal SecurityUser securityUser) {
-        News news = newsJpaRepository.findById(newsId).orElseThrow(() -> new NewsIsNotExistedException(newsId));
+        News news = newsJpaRepository.findById(newsId).orElseThrow(() -> new NewsIsNotAvaliableException(newsId));
         if (!securityUser.getId().equals(news.getPublisher().getId())) {
-            throw new ValidationException("Вы не можете редактировать новость другого автора");
+            throw new RightsValidationException("Вы не можете редактировать новость другого автора");
         }
         newsMapper.updateNews(newsRequestDto, news);
         return newsJpaRepository.save(news);
@@ -54,9 +54,9 @@ public class PublisherServiceImpl implements PublisherService {
     @Override
     @Transactional
     public void deleteNews(Long newsId, @AuthenticationPrincipal SecurityUser securityUser) {
-        News news = newsJpaRepository.findById(newsId).orElseThrow(() -> new NewsIsNotExistedException(newsId));
+        News news = newsJpaRepository.findById(newsId).orElseThrow(() -> new NewsIsNotAvaliableException(newsId));
         if (!securityUser.getId().equals(news.getPublisher().getId())) {
-            throw new ValidationException("Вы не можете удалить новость другого автора");
+            throw new RightsValidationException("Вы не можете удалить новость другого автора");
         }
         newsJpaRepository.deleteById(newsId);
     }
