@@ -1,4 +1,4 @@
-package com.main.mainserver.config;
+package com.main.mainserver.security;
 
 import com.main.mainserver.model.user.Permission;
 import jakarta.servlet.DispatcherType;

@@ -41,8 +41,6 @@ import java.util.Set;
 @ToString
 public class News {
 
-// TODO оставить потом валидацию только в DTO
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "news_id")

@@ -36,6 +36,8 @@ dependencies {
 
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
 
+    implementation 'org.apache.httpcomponents.client5:httpclient5:5.2.1'
+
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     testAnnotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
@@ -46,11 +48,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-security:3.1.2'
-//    compile('io.springfox:springfox-swagger2:${swagger2.version}')
-//    implementation ('io.springfox:springfox-boot-starter:3.0.0'){
-//        exclude group: 'org.mapstruct', module: 'mapstruct'
-////    }
-//
     implementation ('org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'){
         exclude group: 'org.mapstruct', module: 'mapstruct'
     }

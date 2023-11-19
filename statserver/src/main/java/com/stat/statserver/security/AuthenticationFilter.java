@@ -40,7 +40,7 @@ public class AuthenticationFilter extends GenericFilterBean {
             httpResponse.setContentType(MediaType.APPLICATION_JSON_VALUE);
             PrintWriter writer = httpResponse.getWriter();
 
-            ErrorDto invalidAuthError = new ErrorDto(exp.getErrorCode(), exp.getMessage(), HttpStatus.UNAUTHORIZED);
+            StatsErrorApi invalidAuthError = new StatsErrorApi(1002, exp.getMessage(), HttpStatus.UNAUTHORIZED);
             writer.print(objectMapper.writeValueAsString(invalidAuthError));
             writer.flush();
             writer.close();

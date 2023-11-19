@@ -12,14 +12,14 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 
 @Configuration
-public class NewsRateLimiter {
+public class NewsApiRateLimiter {
 
     private final int REQUEST_LIMIT = 100;
     private final Duration REFRESH_PERIOD = Duration.of(1, DAYS);
     private final Duration TIMEOUT_DURATION = Duration.ofMillis(1);
 
     @Bean("newsLimiter")
-    public RateLimiter weatherLimiter() {
+    public RateLimiter newsApiRLimiter() {
         RateLimiterConfig rateLimiterConfig = RateLimiterConfig.custom()
                 .limitRefreshPeriod(REFRESH_PERIOD)
                 .limitForPeriod(REQUEST_LIMIT)

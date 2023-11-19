@@ -28,9 +28,6 @@ public class AdminServiceImpl implements AdminService {
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
 
-    // TODO взаимодействие только с PUBLISHED
-     // TODO подумать где нужно @Transactional
-
     @Override
     @Transactional
     public void rejectNews(Long newsId) {
