@@ -1,6 +1,6 @@
 package com.main.mainserver.clientNewsApi;
 
-import com.main.mainserver.exception.clientNewsApiExceptions.exceptions.InvalidRequestTimePeriodException;
+import com.main.mainserver.exception.clientResponseExceptions.exceptions.InvalidRequestTimePeriodException;
 import com.main.mainserver.model.newsApiDto.NewsReportDto;
 import io.github.resilience4j.ratelimiter.RateLimiter;
 import org.springframework.beans.factory.annotation.Qualifier;

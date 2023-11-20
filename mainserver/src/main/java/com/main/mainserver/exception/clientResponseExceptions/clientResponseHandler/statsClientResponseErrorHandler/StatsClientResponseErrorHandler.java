@@ -1,8 +1,8 @@
-package com.main.mainserver.exception.statsExceptions;
+package com.main.mainserver.exception.clientResponseExceptions.clientResponseHandler.statsClientResponseErrorHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.main.mainserver.exception.clientNewsApiExceptions.exceptions.ApiKeyIsInvalidException;
-import com.main.mainserver.exception.clientNewsApiExceptions.exceptions.UnknownServerInternalException;
+import com.main.mainserver.exception.clientResponseExceptions.exceptions.ApiKeyIsInvalidException;
+import com.main.mainserver.exception.clientResponseExceptions.exceptions.UnknownServerInternalException;
 import com.stat.statserver.security.StatsErrorApi;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.client.ResponseErrorHandler;
@@ -10,7 +10,6 @@ import org.springframework.web.client.ResponseErrorHandler;
 import java.io.IOException;
 
 public class StatsClientResponseErrorHandler implements ResponseErrorHandler {
-// TODO упорядочить handler и exceptions
 
     @Override
     public boolean hasError(ClientHttpResponse httpResponse)

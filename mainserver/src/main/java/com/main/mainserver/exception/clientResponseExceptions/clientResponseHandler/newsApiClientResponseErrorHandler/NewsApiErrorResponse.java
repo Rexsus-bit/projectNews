@@ -1,4 +1,4 @@
-package com.main.mainserver.exception.clientNewsApiExceptions.handler;
+package com.main.mainserver.exception.clientResponseExceptions.clientResponseHandler.newsApiClientResponseErrorHandler;
 
 import lombok.Data;
 

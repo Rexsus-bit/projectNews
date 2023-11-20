@@ -1,16 +1,16 @@
-package com.main.mainserver.exception.clientNewsApiExceptions.handler;
+package com.main.mainserver.exception.clientResponseExceptions.clientResponseHandler.newsApiClientResponseErrorHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.main.mainserver.exception.clientNewsApiExceptions.exceptions.InternalServerException;
-import com.main.mainserver.exception.clientNewsApiExceptions.exceptions.RateIsLimitedException;
-import com.main.mainserver.exception.clientNewsApiExceptions.exceptions.ApiKeyIsNotProvidedException;
-import com.main.mainserver.exception.clientNewsApiExceptions.exceptions.ApiKeyIsInvalidException;
-import com.main.mainserver.exception.clientNewsApiExceptions.exceptions.ApiKeyIsDisabledException;
-import com.main.mainserver.exception.clientNewsApiExceptions.exceptions.ApiKeyIsExhaustedException;
-import com.main.mainserver.exception.clientNewsApiExceptions.exceptions.ParameterIsInvalidException;
-import com.main.mainserver.exception.clientNewsApiExceptions.exceptions.ParameterIsNotIndicatedException;
-import com.main.mainserver.exception.clientNewsApiExceptions.exceptions.UnknownServerInternalException;
+import com.main.mainserver.exception.clientResponseExceptions.exceptions.InternalServerException;
+import com.main.mainserver.exception.clientResponseExceptions.exceptions.RateIsLimitedException;
+import com.main.mainserver.exception.clientResponseExceptions.exceptions.ApiKeyIsNotProvidedException;
+import com.main.mainserver.exception.clientResponseExceptions.exceptions.ApiKeyIsInvalidException;
+import com.main.mainserver.exception.clientResponseExceptions.exceptions.ApiKeyIsDisabledException;
+import com.main.mainserver.exception.clientResponseExceptions.exceptions.ApiKeyIsExhaustedException;
+import com.main.mainserver.exception.clientResponseExceptions.exceptions.ParameterIsInvalidException;
+import com.main.mainserver.exception.clientResponseExceptions.exceptions.ParameterIsNotIndicatedException;
+import com.main.mainserver.exception.clientResponseExceptions.exceptions.UnknownServerInternalException;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.ResponseErrorHandler;

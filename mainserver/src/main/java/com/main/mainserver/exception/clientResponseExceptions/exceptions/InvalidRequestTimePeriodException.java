@@ -1,4 +1,4 @@
-package com.main.mainserver.exception.clientNewsApiExceptions.exceptions;
+package com.main.mainserver.exception.clientResponseExceptions.exceptions;
 
 import com.main.mainserver.exception.NewsAppException;
 import org.springframework.http.HttpStatus;

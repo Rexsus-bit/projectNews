@@ -1,6 +1,6 @@
 package com.main.mainserver.clientNewsApi;
 
-import com.main.mainserver.exception.clientNewsApiExceptions.handler.NewsClientResponseErrorHandler;
+import com.main.mainserver.exception.clientResponseExceptions.clientResponseHandler.newsApiClientResponseErrorHandler.NewsClientResponseErrorHandler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;

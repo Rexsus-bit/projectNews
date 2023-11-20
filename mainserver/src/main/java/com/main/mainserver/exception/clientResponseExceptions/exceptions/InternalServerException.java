@@ -1,16 +1,13 @@
-package com.main.mainserver.exception.clientNewsApiExceptions.exceptions;
+package com.main.mainserver.exception.clientResponseExceptions.exceptions;
 
 import com.main.mainserver.exception.NewsAppException;
 import org.springframework.http.HttpStatus;
 
 
-public class ApiKeyIsNotProvidedException extends NewsAppException {
+public class InternalServerException extends NewsAppException {
 
-    public ApiKeyIsNotProvidedException(int errorCode) {
+    public InternalServerException(int errorCode) {
         super(String.format("Произошла ошибка № %d. Мы уже работаем над устранением проблемы.", errorCode), errorCode,
-                HttpStatus.BAD_GATEWAY);
+                HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
 }
-
-
