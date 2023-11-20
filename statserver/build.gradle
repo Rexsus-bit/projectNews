@@ -30,7 +30,9 @@ sourceCompatibility = JavaVersion.VERSION_17
 
 dependencies {
 
-
+    implementation ('org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'){
+        exclude group: 'org.mapstruct', module: 'mapstruct'
+    }
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     testAnnotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"

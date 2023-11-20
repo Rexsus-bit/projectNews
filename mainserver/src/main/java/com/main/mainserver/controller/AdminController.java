@@ -152,7 +152,8 @@ public class AdminController {
     @Operation(summary = "Запрос статистики",
             description = "Запрос предоставляет статистику по отслеживаемым эндпоинтам")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Статистика предоставлена", content = @Content),
+            @ApiResponse(responseCode = "200", description = "Статистика предоставлена", content = {@Content(mediaType = "application/json",
+                    schema = @Schema(implementation = UserActivityView.class))}),
             @ApiResponse(responseCode = "400", description = "Некорректно введены параметры",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = ApiError.class))})})
