@@ -32,7 +32,7 @@ public class PublisherServiceImpl implements PublisherService {
     @Override
     @Transactional
     public News createNews(News news, @AuthenticationPrincipal SecurityUser securityUser, HttpServletRequest request) {
-        statisticClient.sendStatisticsInfo(new StatsRecordDto(securityUser.getId(), request.getRequestURI(), LocalDateTime.now()));
+        statisticClient.sendStats(new StatsRecordDto(securityUser.getId(), request.getRequestURI(), LocalDateTime.now()));
         User publisher = userJPARepository.findById(securityUser.getId())
                 .orElseThrow(() -> new UserIsNotFoundException(securityUser.getId()));
         news.setPublisher(publisher);

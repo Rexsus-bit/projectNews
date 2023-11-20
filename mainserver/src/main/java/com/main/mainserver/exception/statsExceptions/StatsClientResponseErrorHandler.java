@@ -10,7 +10,7 @@ import org.springframework.web.client.ResponseErrorHandler;
 import java.io.IOException;
 
 public class StatsClientResponseErrorHandler implements ResponseErrorHandler {
-
+// TODO упорядочить handler и exceptions
 
     @Override
     public boolean hasError(ClientHttpResponse httpResponse)

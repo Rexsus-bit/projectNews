@@ -6,7 +6,6 @@ import com.stat.statserver.service.NewsStatisticsService;
 import com.stat.statserver.mapper.StatsRecordMapper;
 import com.stat.statserver.model.StatsRecordDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

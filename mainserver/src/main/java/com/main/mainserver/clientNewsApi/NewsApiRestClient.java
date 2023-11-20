@@ -5,10 +5,6 @@ import com.main.mainserver.model.newsApiDto.NewsReportDto;
 import io.github.resilience4j.ratelimiter.RateLimiter;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -37,8 +33,6 @@ public class NewsApiRestClient {
             throw new InvalidRequestTimePeriodException(109, from, restrictionDate);
         }
         return RateLimiter.decorateSupplier(newsRateLimiter, () -> {
-            HttpHeaders headers = new HttpHeaders();
-            HttpEntity<HttpHeaders> entity = new HttpEntity<>(headers);
             UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url + ("/v2/everything"))
                     .queryParam("q", query)
                     .queryParam("language", "en")
@@ -46,9 +40,7 @@ public class NewsApiRestClient {
                     .queryParam("to", to);
 //                    .queryParam("sortBy", query); // TODO добавить если будет время
 
-        ResponseEntity<NewsReportDto> newsApiDtoResponseEntity =
-                restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, NewsReportDto.class);
-        return newsApiDtoResponseEntity.getBody();
+           return restTemplate.getForObject(builder.toUriString(), NewsReportDto.class);
     }).get();
 
     }

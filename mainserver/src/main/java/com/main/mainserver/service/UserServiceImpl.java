@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public List<News> findNews(String text, List<Long> usersIdList, LocalDateTime rangeStart, LocalDateTime rangeEnd,
                                Integer from, Integer size, SecurityUser securityUser, HttpServletRequest request) {
-        statisticClient.sendStatisticsInfo(new StatsRecordDto(securityUser.getId(), request.getRequestURI(),
+        statisticClient.sendStats(new StatsRecordDto(securityUser.getId(), request.getRequestURI(),
                 LocalDateTime.now()));
         return newsCriteriaRepository.findNewsByCustomCriteria(text, usersIdList, rangeStart, rangeEnd, from, size);
     }
@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public NewsReportDto getNewsFromWeatherApiService(String query, LocalDate from, LocalDate to,
                                                       SecurityUser securityUser, HttpServletRequest request) {
-        statisticClient.sendStatisticsInfo(new StatsRecordDto(securityUser.getId(), request.getRequestURI(),
+        statisticClient.sendStats(new StatsRecordDto(securityUser.getId(), request.getRequestURI(),
                 LocalDateTime.now()));
         return newsApiRestClient.requestNews(query, from, to);
     }
@@ -107,7 +107,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public List<News> getTopNews(Integer limit, SecurityUser securityUser, HttpServletRequest request) {
-        statisticClient.sendStatisticsInfo(new StatsRecordDto(securityUser.getId(), request.getRequestURI(),
+        statisticClient.sendStats(new StatsRecordDto(securityUser.getId(), request.getRequestURI(),
                 LocalDateTime.now()));
         return newsJpaRepository.findAllAndSortByLikesAndComments(limit);
     }

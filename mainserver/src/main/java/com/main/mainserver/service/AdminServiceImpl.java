@@ -1,5 +1,6 @@
 package com.main.mainserver.service;
 
+import com.main.mainserver.clientStats.StatisticClient;
 import com.main.mainserver.exception.controllersExceptions.exceptions.NewsForApprovalException;
 import com.main.mainserver.exception.controllersExceptions.exceptions.NewsIsNotAvaliableException;
 import com.main.mainserver.exception.controllersExceptions.exceptions.UniqueDataException;
@@ -13,11 +14,15 @@ import com.main.mainserver.model.user.User;
 import com.main.mainserver.model.user.UserStatus;
 import com.main.mainserver.repository.NewsJpaRepository;
 import com.main.mainserver.repository.UserJPARepository;
+import com.stat.statserver.model.UserActivityView;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +32,7 @@ public class AdminServiceImpl implements AdminService {
     private final NewsJpaRepository newsJpaRepository;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
+    private final StatisticClient statisticClient;
 
     @Override
     @Transactional
@@ -81,5 +87,10 @@ public class AdminServiceImpl implements AdminService {
     public void banUser(Long userId, UserStatus userStatus) {
        int cnt = userJPARepository.banUser(userStatus, userId);
        if (cnt == 0) throw new UserIsNotFoundException(userId);
+    }
+
+    @Override
+    public List<UserActivityView> getStats(List<Long> userIdList, LocalDateTime start, LocalDateTime end) {
+        return statisticClient.getStats(userIdList, start, end);
     }
 }
