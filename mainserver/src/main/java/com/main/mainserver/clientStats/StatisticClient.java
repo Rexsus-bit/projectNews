@@ -31,9 +31,9 @@ public class StatisticClient {
     }
 
     public void sendStats(StatsRecordDto statsRecordDto) {
-            HttpEntity<StatsRecordDto> entity = new HttpEntity<>(statsRecordDto);
-            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url + ("/stat/record"));
-                    restTemplate.exchange(builder.toUriString(), HttpMethod.POST, entity, StatsRecordDto.class);
+        HttpEntity<StatsRecordDto> entity = new HttpEntity<>(statsRecordDto);
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url + "/stat/record");
+        restTemplate.exchange(builder.toUriString(), HttpMethod.POST, entity, StatsRecordDto.class);
     }
 
     public List<UserActivityView> getStats(List<Long> userIdList, LocalDateTime start, LocalDateTime end) {

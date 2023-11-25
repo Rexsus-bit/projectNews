@@ -12,11 +12,11 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 
 @Configuration
-public class NewsApiRateLimiter {
+public class NewsApiRateLimiterConfig {
 
-    private final int REQUEST_LIMIT = 100;
-    private final Duration REFRESH_PERIOD = Duration.of(1, DAYS);
-    private final Duration TIMEOUT_DURATION = Duration.ofMillis(1);
+    private final static int REQUEST_LIMIT = 100;
+    private final static Duration REFRESH_PERIOD = Duration.of(1, DAYS);
+    private final static Duration TIMEOUT_DURATION = Duration.ofMillis(1);
 
     @Bean("newsLimiter")
     public RateLimiter newsApiRLimiter() {

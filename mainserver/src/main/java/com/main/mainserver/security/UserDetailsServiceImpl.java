@@ -18,7 +18,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         this.userJPARepository = userJPARepository;
     }
 
-    // TODO на сколько ок что я ищу по емейлу, а не name? https://www.baeldung.com/spring-security-extra-login-fields если будет время
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userJPARepository.findUserByEmail(email).orElseThrow(() -> new UserIsNotFoundException(email));

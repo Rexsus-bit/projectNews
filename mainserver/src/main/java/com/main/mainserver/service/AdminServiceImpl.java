@@ -63,7 +63,9 @@ public class AdminServiceImpl implements AdminService {
     @Transactional
     public User addUser(NewUserRequest newUserRequest, Role role) {
         User user = userMapper.toUser(newUserRequest);
-        if (role.equals(Role.ADMIN)) throw new RightsValidationException("Недостаточно прав для создания администратора.");
+        if (role.equals(Role.ADMIN)) {
+            throw new RightsValidationException("Недостаточно прав для создания администратора.");
+        }
         user.setRole(role);
         user.setUserStatus(UserStatus.ACTIVE);
         user.setPassword(passwordEncoder.encode(user.getPassword()));

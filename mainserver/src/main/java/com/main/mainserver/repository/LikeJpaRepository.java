@@ -11,9 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface LikeJpaRepository extends JpaRepository<Like, Long> {
 
-//    Optional<Like> findByUserIdAndNewsId(Long userId, Long newsId);
-
-
     @Transactional
     @Modifying
     @Query(value = "DELETE FROM Like l WHERE l.userId = :userId and l.newsId = :newsId")

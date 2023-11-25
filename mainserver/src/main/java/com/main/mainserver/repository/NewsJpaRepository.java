@@ -21,7 +21,7 @@ public interface NewsJpaRepository extends JpaRepository<News, Long> {
             "GROUP BY n.news_id ORDER BY COUNT(DISTINCT l.like_id) DESC, COUNT(DISTINCT c.comment_id) DESC " +
             "LIMIT ?",
             nativeQuery = true)
-    public List<News> findAllAndSortByLikesAndComments(Integer limit);
+    List<News> findAllAndSortByLikesAndComments(Integer limit);
 
     @Transactional
     @Modifying
@@ -33,11 +33,6 @@ public interface NewsJpaRepository extends JpaRepository<News, Long> {
     @Modifying
     @Query(value = "DELETE FROM News n WHERE n.id = :newsId")
     int deleteNewsById(Long newsId);
-
-    @Transactional
-    @Modifying
-    @Query(value = "DELETE FROM Like l WHERE l.userId = :userId and l.newsId = :newsId")
-    int addComment(Long newsId, Long userId);
 
     boolean existsByIdAndNewsStatus(Long id, NewsStatus newsStatus);
 }
