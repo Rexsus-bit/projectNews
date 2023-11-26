@@ -10,6 +10,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -23,17 +24,18 @@ public class StatisticClient {
 
     @Value("${statistics.url}")
     private String url;
-
+    public static final String TOPIC = "statsTopic";
     private final RestTemplate restTemplate;
+    private final KafkaTemplate<Long, StatsRecordDto> kafkaTemplate;
 
-    public StatisticClient(@Qualifier("statsRestTemplate") RestTemplate restTemplate) {
+    public StatisticClient(@Qualifier("statsRestTemplate") RestTemplate restTemplate,
+                           KafkaTemplate<Long, StatsRecordDto> kafkaTemplate) {
         this.restTemplate = restTemplate;
+        this.kafkaTemplate = kafkaTemplate;
     }
 
     public void sendStats(StatsRecordDto statsRecordDto) {
-        HttpEntity<StatsRecordDto> entity = new HttpEntity<>(statsRecordDto);
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url + "/stat/record");
-        restTemplate.exchange(builder.toUriString(), HttpMethod.POST, entity, StatsRecordDto.class);
+        kafkaTemplate.send(TOPIC, statsRecordDto.getUserId(), statsRecordDto);
     }
 
     public List<UserActivityView> getStats(List<Long> userIdList, LocalDateTime start, LocalDateTime end) {
