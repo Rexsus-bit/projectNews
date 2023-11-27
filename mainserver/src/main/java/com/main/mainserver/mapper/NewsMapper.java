@@ -1,7 +1,6 @@
 package com.main.mainserver.mapper;
 
 import com.main.mainserver.model.news.News;
-import com.main.mainserver.model.news.NewsFullDto;
 import com.main.mainserver.model.news.NewsRequestDto;
 import com.main.mainserver.model.news.NewsShortDto;
 import org.mapstruct.Mapper;
@@ -30,9 +29,5 @@ public interface NewsMapper {
     NewsShortDto toNewsShortDto(News news);
 
     List<NewsShortDto> toNewsShortDtoList(List<News> newsList);
-
-    NewsFullDto toNewsFullDto(News news);
-
-    List<NewsFullDto> toNewsFullDtoList(List<News> newsList);
 
 }

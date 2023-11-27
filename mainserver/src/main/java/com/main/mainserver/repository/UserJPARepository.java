@@ -11,13 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public interface UserJPARepository extends JpaRepository <User, Long> {
+public interface UserJPARepository extends JpaRepository<User, Long> {
     Optional<User> findUserByEmail(String email);
 
     boolean existsByEmailOrUsername(String email, String username);
 
     @Transactional
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Query("UPDATE User u SET u.userStatus = :userStatus WHERE u.id = :userId")
     int banUser(UserStatus userStatus, Long userId);
 

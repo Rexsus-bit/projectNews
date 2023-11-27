@@ -2,8 +2,10 @@ package com.main.mainserver.exception.clientResponseExceptions.clientResponseHan
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.main.mainserver.exception.clientResponseExceptions.exceptions.ApiKeyIsInvalidException;
+import com.main.mainserver.exception.clientResponseExceptions.exceptions.InternalServerException;
+import com.main.mainserver.exception.clientResponseExceptions.exceptions.ParameterIsInvalidException;
 import com.main.mainserver.exception.clientResponseExceptions.exceptions.UnknownServerInternalException;
-import com.stat.statserver.security.StatsErrorApi;
+import com.stat.statserver.handler.StatsErrorApi;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.client.ResponseErrorHandler;
 
@@ -29,6 +31,8 @@ public class StatsClientResponseErrorHandler implements ResponseErrorHandler {
 
         switch (errorCode) {
             case (1002) -> throw new ApiKeyIsInvalidException(445);
+            case (977) -> throw new ParameterIsInvalidException(768);
+            case (901) -> throw new InternalServerException(897);
             default -> throw new UnknownServerInternalException(450);
         }
 

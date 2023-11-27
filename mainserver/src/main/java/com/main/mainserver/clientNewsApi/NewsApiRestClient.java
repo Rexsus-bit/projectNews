@@ -38,10 +38,9 @@ public class NewsApiRestClient {
                     .queryParam("language", "en")
                     .queryParam("from", from)
                     .queryParam("to", to);
-//                    .queryParam("sortBy", query); // TODO добавить если будет время
 
-           return restTemplate.getForObject(builder.toUriString(), NewsReportDto.class);
-    }).get();
+            return restTemplate.getForObject(builder.toUriString(), NewsReportDto.class);
+        }).get();
 
     }
 }

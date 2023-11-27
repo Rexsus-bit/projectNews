@@ -1,0 +1,18 @@
+{
+  "request": {
+    "urlPathPattern": "/v2/everything",
+    "method": "GET",
+    "queryParameters": {
+      "q": {
+        "equalTo": "tesla"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "Response.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

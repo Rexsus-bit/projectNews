@@ -1,6 +1,7 @@
 package com.stat.statserver.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.stat.statserver.handler.StatsErrorApi;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;

@@ -1,0 +1,22 @@
+{
+  "request": {
+    "urlPathPattern": "/v2/everything",
+    "method": "GET",
+    "queryParameters": {
+      "q": {
+        "equalTo": ""
+      }
+    }
+  },
+  "response": {
+    "status": 400,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "status": "error",
+      "code": "parametersMissing",
+      "message": "Required parameters are missing, the scope of your search is too broad. Please set any of the following required parameters and try again: q, qInTitle, sources, domains."
+    }
+  }
+}

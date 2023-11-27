@@ -24,9 +24,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import lombok.ToString;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
@@ -38,7 +35,6 @@ import java.util.Set;
 @EqualsAndHashCode
 @Entity
 @Table(name = "news")
-@ToString
 public class News {
 
     @Id
@@ -56,7 +52,6 @@ public class News {
     @Column(name = "news_status")
     NewsStatus newsStatus;
     @NotNull
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column(name = "datetime")
     private LocalDateTime dateTime;
     @ManyToOne

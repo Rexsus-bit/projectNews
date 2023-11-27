@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface CommentJPARepository extends JpaRepository<Comment, Long> {
 
     @Transactional
-    @Modifying
+    @Modifying (clearAutomatically = true)
     @Query(value = "DELETE FROM Comment c WHERE c.id = :commentId AND c.owner.id = :ownerId")
     int deleteCommentByIdAndOwnerId(Long commentId, Long ownerId);
 

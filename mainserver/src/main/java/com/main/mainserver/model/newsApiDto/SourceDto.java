@@ -1,13 +1,18 @@
 package com.main.mainserver.model.newsApiDto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.experimental.FieldDefaults;
+import lombok.Getter;
 
-@Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@Getter
 public class SourceDto {
-    String name;
+
+    private final String name;
+
+    @JsonCreator
+    public SourceDto(String name) {
+        this.name = name;
+    }
+
 }

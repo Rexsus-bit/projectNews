@@ -3,6 +3,7 @@ plugins {
     id 'org.springframework.boot' version '3.1.5'
     id 'io.spring.dependency-management' version '1.1.3'
     id "io.freefair.lombok" version "8.3"
+    id 'jacoco'
 }
 
 group = 'com.stat'
@@ -26,14 +27,12 @@ ext {
     mapstructVersion = "1.5.5.Final"
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-
-tasks.named("bootJar") {
+bootJar {
     archiveClassifier = 'exec'
     enabled = true
 }
 
-tasks.named("jar") {
+jar {
     archiveClassifier = ''
     enabled = true
 }
@@ -44,6 +43,7 @@ dependencies {
         exclude group: 'org.mapstruct', module: 'mapstruct'
     }
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     testAnnotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     implementation 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
@@ -56,6 +56,12 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.1'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.2'
     implementation 'org.springframework.kafka:spring-kafka:3.0.9'
+    testImplementation 'org.testcontainers:testcontainers:1.19.1'
+    testImplementation 'org.testcontainers:jdbc:1.19.1'
+    testImplementation 'org.testcontainers:junit-jupiter:1.19.1'
+    testImplementation 'org.testcontainers:postgresql:1.19.3'
+    testImplementation 'com.h2database:h2:1.3.148'
+
 }
 
 compileJava {

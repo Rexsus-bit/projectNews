@@ -5,10 +5,8 @@ import lombok.Value;
 
 import java.util.List;
 
-
 @Value
 @JsonIgnoreProperties(ignoreUnknown = true)
-
 public class NewsReportDto {
 
     String status;

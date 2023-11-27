@@ -7,7 +7,7 @@ public class NewsForApprovalException extends NewsAppException {
 
     public NewsForApprovalException(Long newsId) {
         super(String.format("Произошла ошибка № %d. Новость с id = %d не подлежит ревью.", 110, newsId), 110,
-                HttpStatus.FORBIDDEN);
+                HttpStatus.BAD_REQUEST);
     }
 
 }

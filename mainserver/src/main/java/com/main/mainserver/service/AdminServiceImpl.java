@@ -87,8 +87,8 @@ public class AdminServiceImpl implements AdminService {
     @Override
     @Transactional
     public void banUser(Long userId, UserStatus userStatus) {
-       int cnt = userJPARepository.banUser(userStatus, userId);
-       if (cnt == 0) throw new UserIsNotFoundException(userId);
+        int cnt = userJPARepository.banUser(userStatus, userId);
+        if (cnt == 0) throw new UserIsNotFoundException(userId);
     }
 
     @Override

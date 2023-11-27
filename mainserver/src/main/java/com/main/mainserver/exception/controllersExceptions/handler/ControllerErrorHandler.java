@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
@@ -20,7 +19,7 @@ public class ControllerErrorHandler {
 
     private final String MESSAGE = "message";
 
-    @ExceptionHandler({NewsAppException.class})
+    @ExceptionHandler(NewsAppException.class)
     public ResponseEntity<ApiError> handleNotFound(final NewsAppException e) {
         return new ResponseEntity<>(new ApiError(e.getErrorCode(),
                 Map.of(MESSAGE, e.getMessage()),
@@ -37,31 +36,28 @@ public class ControllerErrorHandler {
             String errorMessage = error.getDefaultMessage();
             messages.put(fieldName, errorMessage);
         });
-        return new ResponseEntity <>(new ApiError(177,
+        return new ResponseEntity<>(new ApiError(177,
                 messages,
                 HttpStatus.BAD_REQUEST,
                 LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS)), HttpStatus.BAD_REQUEST);
 
     }
 
-    @ExceptionHandler({MethodArgumentTypeMismatchException.class})
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<ApiError> handleMethodArgumentTypeMismatchException(
-            MethodArgumentTypeMismatchException e) {
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<ApiError> handleMethodArgumentTypeMismatchException() {
         return new ResponseEntity<>(new ApiError(357,
-                Map.of(MESSAGE, e.getMessage()),
+                Map.of(MESSAGE, "Введены некорректные данные"),
                 HttpStatus.BAD_REQUEST,
                 LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS)), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Throwable.class)
-    public ResponseEntity<ApiError> handleException(Throwable e) {
+    public ResponseEntity<ApiError> handleException() {
         final int errorCode = 9000;
         return new ResponseEntity<>(new ApiError(errorCode,
                 Map.of(MESSAGE, String.format("Произошла ошибка № %d. Мы уже работаем над ее устранением.", errorCode)),
                 HttpStatus.INTERNAL_SERVER_ERROR,
                 LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS)), HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
 
 }

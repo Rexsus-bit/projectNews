@@ -36,17 +36,17 @@ public class NewsClientResponseErrorHandler implements ResponseErrorHandler {
                 .readValue(httpResponse.getBody(), NewsApiErrorResponse.class);
         String errorCode = newsApiErrorResponse.getCode();
 
-            switch (errorCode) {
-                case ("apiKeyDisabled") -> throw new ApiKeyIsDisabledException(100);
-                case ("apiKeyInvalid") -> throw new ApiKeyIsInvalidException(101);
-                case ("apiKeyExhausted") -> throw new ApiKeyIsExhaustedException(102);
-                case ("apiKeyMissing") -> throw new ApiKeyIsNotProvidedException(103);
-                case ("parameterInvalid") -> throw new ParameterIsInvalidException(104);
-                case ("parametersMissing") -> throw new ParameterIsNotIndicatedException(105);
-                case ("rateLimited") -> throw new RateIsLimitedException(106);
-                case ("unexpectedError") -> throw new InternalServerException(107);
-                default -> throw new UnknownServerInternalException(108);
-            }
+        switch (errorCode) {
+            case ("apiKeyDisabled") -> throw new ApiKeyIsDisabledException(100);
+            case ("apiKeyInvalid") -> throw new ApiKeyIsInvalidException(101);
+            case ("apiKeyExhausted") -> throw new ApiKeyIsExhaustedException(102);
+            case ("apiKeyMissing") -> throw new ApiKeyIsNotProvidedException(103);
+            case ("parameterInvalid") -> throw new ParameterIsInvalidException(104);
+            case ("parametersMissing") -> throw new ParameterIsNotIndicatedException(105);
+            case ("rateLimited") -> throw new RateIsLimitedException(106);
+            case ("unexpectedError") -> throw new InternalServerException(107);
+            default -> throw new UnknownServerInternalException(108);
+        }
 
     }
 }

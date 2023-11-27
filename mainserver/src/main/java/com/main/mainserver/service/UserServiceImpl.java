@@ -7,7 +7,6 @@ import com.main.mainserver.exception.controllersExceptions.exceptions.LikeIsExis
 import com.main.mainserver.exception.controllersExceptions.exceptions.LikeIsNotExistedException;
 import com.main.mainserver.exception.controllersExceptions.exceptions.NewsIsNotAvaliableException;
 import com.main.mainserver.exception.controllersExceptions.exceptions.NewsIsNotPublishedException;
-import com.main.mainserver.exception.controllersExceptions.exceptions.UserIsNotFoundException;
 import com.main.mainserver.model.Like;
 import com.main.mainserver.model.comment.Comment;
 import com.main.mainserver.model.news.News;
@@ -68,8 +67,7 @@ public class UserServiceImpl implements UserService {
         if (!news.getNewsStatus().equals(NewsStatus.PUBLISHED)) {
             throw new NewsIsNotPublishedException(newsId);
         }
-        User user = userJPARepository.findById(securityUser.getId()).orElseThrow(()
-                -> new UserIsNotFoundException(securityUser.getId()));
+        User user = userJPARepository.findById(securityUser.getId()).get();
         Comment comment = new Comment(null, commentText, news, user, LocalDateTime.now());
         return commentJPARepository.save(comment);
     }
@@ -89,7 +87,7 @@ public class UserServiceImpl implements UserService {
         if (!newsJpaRepository.existsByIdAndNewsStatus(newsId, NewsStatus.PUBLISHED))
             throw new NewsIsNotAvaliableException(newsId);
         try {
-            likeJpaRepository.save(new Like(null, newsId, securityUser.getId()));
+            likeJpaRepository.saveAndFlush(new Like(null, newsId, securityUser.getId()));
         } catch (DataIntegrityViolationException e) {
             throw new LikeIsExistedException(securityUser.getId(), newsId);
         }

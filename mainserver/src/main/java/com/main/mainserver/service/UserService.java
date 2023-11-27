@@ -27,4 +27,5 @@ public interface UserService {
     void deleteLikeFromUser(Long newsId, SecurityUser securityUser);
 
     List<News> getTopNews(Integer limit, SecurityUser securityUser, HttpServletRequest request);
+
 }

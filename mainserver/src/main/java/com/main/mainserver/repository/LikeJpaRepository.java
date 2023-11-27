@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface LikeJpaRepository extends JpaRepository<Like, Long> {
 
     @Transactional
-    @Modifying
+    @Modifying (clearAutomatically = true)
     @Query(value = "DELETE FROM Like l WHERE l.userId = :userId and l.newsId = :newsId")
     int deleteLikeByUserIdAndNewsId(Long userId, Long newsId);
 

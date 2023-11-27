@@ -34,7 +34,7 @@ public class NewsCriteriaRepository {
             predicates.add(cb.in(root.get("publisher").get("id")).value(users));
         }
 
-        if (rangeStart != null ) {
+        if (rangeStart != null) {
             predicates.add(cb.greaterThan(root.get("dateTime"), rangeStart));
         }
 
@@ -53,4 +53,5 @@ public class NewsCriteriaRepository {
                         .where(cb.and(predicates.toArray(new Predicate[]{}))))
                 .setFirstResult(from).setMaxResults(size).getResultList();
     }
+
 }

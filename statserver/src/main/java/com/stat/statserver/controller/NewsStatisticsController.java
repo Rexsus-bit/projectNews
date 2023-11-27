@@ -2,7 +2,7 @@ package com.stat.statserver.controller;
 
 
 import com.stat.statserver.model.UserActivityView;
-import com.stat.statserver.security.StatsErrorApi;
+import com.stat.statserver.handler.StatsErrorApi;
 import com.stat.statserver.service.NewsStatisticsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -32,7 +32,11 @@ public class NewsStatisticsController {
             description = "Запрос предоставляет статистику по отслеживаемым эндпоинтам")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Статистика предоставлена", content =
-                    {@Content(mediaType = "application/json", schema = @Schema(implementation = UserActivityView.class))}),
+                    {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UserActivityView.class))}),
+            @ApiResponse(responseCode = "400", description = "Некорректно введены параметры запроса",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = StatsErrorApi.class))}),
             @ApiResponse(responseCode = "401", description = "Ошибка авторизации",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = StatsErrorApi.class))})})

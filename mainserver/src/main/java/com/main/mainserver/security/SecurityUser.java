@@ -66,8 +66,8 @@ public class SecurityUser implements UserDetails {
         return isActive;
     }
 
-    public static UserDetails fromUser (User user){
-    return new SecurityUser(user.getEmail(), user.getPassword(), user.getRole().getAuthorities().stream().toList(),
-            user.getUserStatus().equals(UserStatus.ACTIVE), user.getId());
+    public static UserDetails fromUser(User user) {
+        return new SecurityUser(user.getEmail(), user.getPassword(), user.getRole().getAuthorities().stream().toList(),
+                user.getUserStatus().equals(UserStatus.ACTIVE), user.getId());
     }
 }

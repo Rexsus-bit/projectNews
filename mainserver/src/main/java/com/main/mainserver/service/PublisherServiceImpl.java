@@ -14,7 +14,6 @@ import com.main.mainserver.security.SecurityUser;
 import com.stat.statserver.model.StatsRecordDto;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,7 +30,7 @@ public class PublisherServiceImpl implements PublisherService {
 
     @Override
     @Transactional
-    public News createNews(News news, @AuthenticationPrincipal SecurityUser securityUser, HttpServletRequest request) {
+    public News createNews(News news, SecurityUser securityUser, HttpServletRequest request) {
         statisticClient.sendStats(new StatsRecordDto(securityUser.getId(), request.getRequestURI(), LocalDateTime.now()));
         User publisher = userJPARepository.findById(securityUser.getId())
                 .orElseThrow(() -> new UserIsNotFoundException(securityUser.getId()));
@@ -41,8 +40,7 @@ public class PublisherServiceImpl implements PublisherService {
 
     @Override
     @Transactional
-    public News updateNews(Long newsId, NewsRequestDto newsRequestDto,
-                           @AuthenticationPrincipal SecurityUser securityUser) {
+    public News updateNews(Long newsId, NewsRequestDto newsRequestDto, SecurityUser securityUser) {
         News news = newsJpaRepository.findById(newsId).orElseThrow(() -> new NewsIsNotAvaliableException(newsId));
         if (!securityUser.getId().equals(news.getPublisher().getId())) {
             throw new RightsValidationException("Вы не можете редактировать новость другого автора");
@@ -53,7 +51,7 @@ public class PublisherServiceImpl implements PublisherService {
 
     @Override
     @Transactional
-    public void deleteNews(Long newsId, @AuthenticationPrincipal SecurityUser securityUser) {
+    public void deleteNews(Long newsId, SecurityUser securityUser) {
         News news = newsJpaRepository.findById(newsId).orElseThrow(() -> new NewsIsNotAvaliableException(newsId));
         if (!securityUser.getId().equals(news.getPublisher().getId())) {
             throw new RightsValidationException("Вы не можете удалить новость другого автора");

@@ -43,7 +43,8 @@ public class UserController {
     private final UserService userService;
     private final NewsMapper newsMapper;
     private final CommentMapper commentMapper;
-    private final String DATE_TIME_REGEX_FORMAT = "^(\\d{4})-(\\d{2})-(\\d{2}) (\\d{2}):(\\d{2}):(\\d{2})$";
+    private static final String DATE_TIME_REGEX_FORMAT = "^(\\d{4})-(\\d{2})-(\\d{2}) (\\d{2}):(\\d{2}):(\\d{2})$";
+    private static final String DATE_REGEX_FORMAT = "^(\\d{4})-(\\d{2})-(\\d{2}) (\\d{2}):(\\d{2}):(\\d{2})$";
 
     @GetMapping("/news")
     @Operation(summary = "Поиск новостей",
@@ -70,7 +71,7 @@ public class UserController {
             @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeEnd,
             @Parameter(description = "Выбрать порядковый номер первого результата из поисковой выдачи")
             @RequestParam(defaultValue = "0") Integer from,
-            @Parameter(description = "Выбрать порядкой номер последнего результата из поисковой выдачи")
+            @Parameter(description = "Выбрать порядковый номер последнего результата из поисковой выдачи")
             @RequestParam(defaultValue = "10") Integer size,
             @AuthenticationPrincipal SecurityUser securityUser,
             HttpServletRequest request) {
@@ -101,11 +102,11 @@ public class UserController {
     public NewsReportDto getNewsFromWeatherApiService(
             @RequestParam String query,
             @Parameter(description = "Поиск новостей после указанной даты", schema = @Schema(type = "string",
-                            pattern = DATE_TIME_REGEX_FORMAT))
+                    pattern = DATE_REGEX_FORMAT))
             @RequestParam(required = false)
             @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate from,
             @Parameter(description = "Поиск новостей до указанной даты", schema = @Schema(type = "string",
-                            pattern = DATE_TIME_REGEX_FORMAT))
+                    pattern = DATE_REGEX_FORMAT))
             @RequestParam(required = false)
             @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate to,
             @AuthenticationPrincipal SecurityUser securityUser,

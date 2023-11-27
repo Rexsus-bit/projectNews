@@ -7,12 +7,8 @@
     <changeSet id="0002" author="romanbizin">
         <sql>
             INSERT INTO users (email, password, username, user_role, user_status)
-            VALUES ('r@r.r', '$2a$10$NQCsYUryLBfd4/lh3nIhgOIOnCpu7pmoLk4bHg.DFeCBZblNSCRAC', 'r', 'ADMIN','ACTIVE');
-        </sql>
-
-        <sql>
-            INSERT INTO users (email, password, username, user_role, user_status)
-            VALUES ('u@u.u', '$2a$10$NQCsYUryLBfd4/lh3nIhgOIOnCpu7pmoLk4bHg.DFeCBZblNSCRAC', 'u', 'USER','ACTIVE');
+            VALUES ('admin@mail.com', '$2a$10$NQCsYUryLBfd4/lh3nIhgOIOnCpu7pmoLk4bHg.DFeCBZblNSCRAC', 'admin', 'ADMIN',
+                    'ACTIVE');
         </sql>
 
     </changeSet>

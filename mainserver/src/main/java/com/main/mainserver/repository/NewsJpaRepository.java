@@ -2,7 +2,6 @@ package com.main.mainserver.repository;
 
 import com.main.mainserver.model.news.News;
 
-
 import com.main.mainserver.model.news.NewsStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -24,15 +23,16 @@ public interface NewsJpaRepository extends JpaRepository<News, Long> {
     List<News> findAllAndSortByLikesAndComments(Integer limit);
 
     @Transactional
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Query("UPDATE News n SET n.newsStatus = :newsStatus WHERE n.id = :newsId and n.newsStatus = 'CREATED'")
     int setNewsStatus(NewsStatus newsStatus, Long newsId);
 
 
     @Transactional
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Query(value = "DELETE FROM News n WHERE n.id = :newsId")
     int deleteNewsById(Long newsId);
 
     boolean existsByIdAndNewsStatus(Long id, NewsStatus newsStatus);
+
 }

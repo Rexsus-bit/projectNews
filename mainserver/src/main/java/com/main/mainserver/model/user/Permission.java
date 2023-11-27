@@ -6,9 +6,7 @@ public enum Permission {
     PUBLISH("publish_activity"),
     ADMIN("admin_activity");
 
-
     private final String permission;
-
 
     Permission(String permission) {
         this.permission = permission;
@@ -17,4 +15,5 @@ public enum Permission {
     public String getPermission() {
         return permission;
     }
+
 }
