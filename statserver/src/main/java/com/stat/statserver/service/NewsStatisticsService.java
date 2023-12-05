@@ -18,7 +18,7 @@ public class NewsStatisticsService {
 
     private final StatsRecordJpaRepository statsRecordJpaRepository;
     private final StatsRecordMapper statsRecordMapper;
-    public static final String TOPIC = "statsTopic";
+    private static final String TOPIC = "statsTopic";
 
     public List<UserActivityView> getStats(List<Long> userIdList, LocalDateTime start, LocalDateTime end) {
         return statsRecordJpaRepository.getStats(userIdList, start, end);

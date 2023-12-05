@@ -1,10 +1,8 @@
 package com.main.mainserver.util;
 
 import java.security.SecureRandom;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Random;
 import java.util.UUID;
 
 public class RandomDataGenerator {
@@ -32,7 +30,5 @@ public class RandomDataGenerator {
     public static long getRandomLongNumber() {
         return Math.abs(rand.nextLong());
     }
-
-
 
 }

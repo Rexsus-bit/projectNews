@@ -24,7 +24,7 @@ public class StatisticClient {
 
     @Value("${statistics.url}")
     private String url;
-    public static final String TOPIC = "statsTopic";
+    private static final String TOPIC = "statsTopic";
     private final RestTemplate restTemplate;
     private final KafkaTemplate<Long, StatsRecordDto> kafkaTemplate;
 

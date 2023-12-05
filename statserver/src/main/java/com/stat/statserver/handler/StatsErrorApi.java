@@ -1,12 +1,10 @@
 package com.stat.statserver.handler;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Value;
 import org.springframework.http.HttpStatus;
 
-@Data
-@AllArgsConstructor
+@Value
 @Schema(description = "В StatsErrorApi вовзращается информация о возникшей ошибке")
 public class StatsErrorApi {
 

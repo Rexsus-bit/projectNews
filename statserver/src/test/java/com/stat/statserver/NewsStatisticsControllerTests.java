@@ -27,12 +27,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest/*(properties="spring.main.lazy-initialization=true")*/
+@SpringBootTest
 @AutoConfigureMockMvc
 public class NewsStatisticsControllerTests {
 
     @MockBean
-    NewsStatisticsService newsStatisticsService;
+    private NewsStatisticsService newsStatisticsService;
     @Autowired
     private MockMvc mvc;
 

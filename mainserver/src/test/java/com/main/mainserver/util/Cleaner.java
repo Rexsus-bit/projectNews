@@ -12,7 +12,5 @@ public class Cleaner {
         jdbcTemplate.execute("ALTER SEQUENCE comments_comment_id_seq RESTART WITH 1");
         jdbcTemplate.execute("ALTER SEQUENCE stats_records_stats_id_seq RESTART WITH 1");
 
-
-
     }
 }

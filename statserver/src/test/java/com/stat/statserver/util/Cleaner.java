@@ -8,7 +8,5 @@ public class Cleaner {
         JdbcTestUtils.deleteFromTables(jdbcTemplate, "stats_records");
         jdbcTemplate.execute("ALTER SEQUENCE stats_records_stats_id_seq RESTART WITH 1");
 
-
-
     }
 }

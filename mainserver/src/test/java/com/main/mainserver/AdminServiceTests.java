@@ -79,7 +79,7 @@ public class AdminServiceTests {
     private JdbcTemplate jdbcTemplate;
 
     @Mock
-    UserActivityView mockUserActivityView;
+    private UserActivityView mockUserActivityView;
 
     @Container
     private static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(DockerImageName

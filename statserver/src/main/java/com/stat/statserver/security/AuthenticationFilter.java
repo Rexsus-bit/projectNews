@@ -25,7 +25,7 @@ public class AuthenticationFilter extends GenericFilterBean {
 
     private static final String AUTH_TOKEN_HEADER_NAME = "X-API-KEY";
 
-    ObjectMapper objectMapper = new ObjectMapper();
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
